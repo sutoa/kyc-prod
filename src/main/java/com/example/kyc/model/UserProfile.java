@@ -1,55 +1,40 @@
 package com.example.kyc.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import java.time.Instant;
-import java.util.UUID;
 
 @Entity
 @Table(name = "user_profiles")
 public class UserProfile {
     @Id
-    private String id;
-
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
-
-    @Column(nullable = false, unique = true)
+    @Email
+    @NotBlank
+    @Column(unique = true)
     private String email;
 
-    @Column(name = "adoption_location")
+    @NotBlank
+    private String fullName;
+
+    @NotBlank
     private String adoptionLocation;
 
-    @Column(name = "coe_region")
+    @NotBlank
     private String coeRegion;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Instant createdAt;
-
-    @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        if (id == null) {
-            id = UUID.randomUUID().toString();
-        }
-        Instant now = Instant.now();
-        createdAt = now;
-        updatedAt = now;
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = Instant.now();
-    }
-
     // Getters and Setters
-    public String getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFullName() {
@@ -58,14 +43,6 @@ public class UserProfile {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getAdoptionLocation() {
@@ -84,11 +61,11 @@ public class UserProfile {
         this.coeRegion = coeRegion;
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
     public Instant getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

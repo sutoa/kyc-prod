@@ -1,20 +1,22 @@
-# KYC Prod — PRD (v0.1 Minimal, Liquibase)
+# KYC Prod — PRD (v0.1 + UI Search, Liquibase)
 
 ## 1) Project Overview
 **Goal:** Web app (UI + REST API) to maintain KYC attributes for users—initially **Adoption Location** and **COE Region**.  
-**v0.1 scope:** Implement **one read-only REST API** that returns a user’s KYC info **by email**. (Write-only/edit/approval/versioning will come later.)
+**v0.1 scope:** 
+- **Backend:** Implement **one read-only REST API** that returns a user’s KYC info **by email**.  
+- **Frontend:** Implement a **UI Search** page that lets a user enter an email and view the returned KYC info (read-only).
 
 **Tech**
 - **Backend:** Spring Boot 3 (Java 21), Maven, Spring Web, JPA/Hibernate, Validation, springdoc-openapi.
 - **DB:** Oracle (prod), H2 (dev). **Schema migrations via Liquibase.**
-- **Frontend:** React (latest stable) + TypeScript (placeholder for read-only screen later).
+- **Frontend:** React (latest stable) + TypeScript + Vite.
 - **Deploy:** Container image; Kubernetes on **GKE**.
 - **Docs:** Swagger UI for the REST API.
 
 ---
 
 ## 2) Roles (for future scopes)
-- **Manager**, **User**. (No role gating needed for the single read endpoint in v0.1; add JWT/RBAC later.)
+- **Manager**, **User**. (No role gating in v0.1; add JWT/RBAC later.)
 
 ---
 
@@ -29,7 +31,7 @@
 - `createdAt` (timestamp)
 - `updatedAt` (timestamp)
 
-**Liquibase changelog** (XML) — `src/main/resources/db/changelog/db.changelog-master.xml`:
+**Liquibase changelog** — `src/main/resources/db/changelog/db.changelog-master.xml`:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
@@ -77,11 +79,11 @@
 </databaseChangeLog>
 ```
 
-> Liquibase will map generic SQL types to Oracle/H2 automatically. If needed, add `<modifyDataType>` changes per DB in later versions.
+> Liquibase will map generic SQL types to Oracle/H2 automatically; adjust with `<modifyDataType>` if needed later.
 
 ---
 
-## 4) REST API (the only one in v0.1)
+## 4) REST API (v0.1)
 
 ### Get user by **email**
 - **Method/Path:** `GET /api/v1/users/by-email`
@@ -111,23 +113,41 @@
 
 ---
 
-## 5) Acceptance Criteria
-- Given an existing email, `GET /api/v1/users/by-email?email=...` returns **200** with correct values.
-- Unknown email returns **404**.
-- Swagger lists the endpoint with schema examples.
-- Works with **H2 (dev)** and **Oracle (prod)** using **Liquibase** migrations.
+## 5) UI (v0.1) — **Search Page**
+**Route:** `/search` (default route)
+
+**Features**
+- Email input (required), basic client-side validation (format, length).
+- Search button triggers `GET /api/v1/users/by-email?email=...`.
+- States: **idle**, **loading**, **result**, **not found**, **error**.
+- Result card shows **Full Name, Email, Adoption Location, COE Region, Updated At**.
+- Utility actions: **Clear** form, copy email to clipboard.
+- Accessibility: labeled input, keyboard navigable, screen-reader friendly messages.
+- Responsive layout (single-column on mobile).
+
+**Wireframe placeholder:** `/docs/wireframes/search.png`
+
+**Example empty/result/error messages**
+- Empty: “Enter an email to search.”
+- Not Found: “No user found for that email.”
+- Error: “Something went wrong. Please try again.”
 
 ---
 
-## 6) Non-Functional (v0.1)
+## 6) Acceptance Criteria
+- UI validates email format before calling the API; invalid email never triggers request.
+- On valid email with existing record, UI shows result card with fields populated.
+- On unknown email, UI shows “No user found” state.
+- On backend/network error, UI shows a non-technical error message and allows retry.
+- Swagger lists the endpoint; local dev works against H2 with Liquibase dev seed.
+
+---
+
+## 7) Non-Functional (v0.1)
 - JSON logging; Spring Actuator health (dev).
 - Container builds and runs locally; provide Kubernetes manifest stubs (deployment, service, readiness/liveness) for GKE.
-- Minimal validation on the `email` parameter (not blank, reasonable length, basic format).
-
----
-
-## 7) Placeholders
-- **Wireframes:** `/docs/wireframes/read-user.png` (to be supplied later).
+- Minimal rate limiting not required; debounce client input optional.
+- Internationalization not required in v0.1.
 
 ---
 
@@ -140,24 +160,26 @@
 > - Dev DB: `com.h2database:h2`  
 > - Prod DB: `com.oracle.database.jdbc:ojdbc11`  
 > Add `UserProfile` entity + JPA repository.  
-> Add `src/main/resources/db/changelog/db.changelog-master.xml` (see PRD).  
-> Wire Liquibase to run on startup for both dev and prod.  
-> Implement **GET `/api/v1/users/by-email?email=...`** in controller + service.  
-> Add global exception handler to return the error JSON format above.  
+> Add Liquibase master changelog with changesets above.  
+> Implement **GET `/api/v1/users/by-email?email=...`** controller + service.  
+> Add global exception handler returning the error JSON format.  
 > Enable Swagger UI at `/swagger-ui.html` in dev.
 
+**Frontend scaffold**
+> Create React + TypeScript + Vite app `kyc-web`. Add a `/search` page with an email input and a search button. On submit, call the API and render the states (idle/loading/result/not-found/error). Keep styles simple (CSS modules or Tailwind). Expose `VITE_API_BASE_URL` in `.env` and use it in a small API client. Add basic unit test for the search component (optional).
+
 **Config examples**
-- `application.yaml` (shared):
+- `application.yaml` (shared Liquibase reference):
   ```yaml
   spring:
     liquibase:
       change-log: classpath:db/changelog/db.changelog-master.xml
   ```
-- `application-dev.yaml`: H2 file/in-memory, Hibernate ddl-auto=validate, Liquibase enabled, `spring.profiles.active: dev`.
-- `application-prod.yaml`: Oracle URL/creds via env vars; ddl-auto=validate; Liquibase enabled; set Liquibase context if you want to skip seeds in prod.
+- `application-dev.yaml`: H2 config, ddl-auto=validate, Liquibase enabled, dev context for seed if desired.
+- `application-prod.yaml`: Oracle URL/creds via env vars; ddl-auto=validate; Liquibase enabled.
 
 **Dev run & seed**
-- Use Liquibase `context="dev"` for sample seed data (changeSet `002-seed-user`).
+- Add Liquibase changeSet `002-seed-user` with `context="dev"` for testing.
 
 **Sample cURL**
 ```bash
@@ -167,4 +189,4 @@ curl "http://localhost:8080/api/v1/users/by-email?email=jane.smith@example.com"
 ---
 
 ## 9) Future Scopes (not in v0.1)
-- Search, create/edit, manager approve/reject, immutable version history, audit logs, JWT/RBAC, UI screens (Search, Detail, Manager Queue, Version History).
+- Full search (by name/filters), create/edit, manager approve/reject, immutable version history, audit logs, JWT/RBAC, additional UI screens (Detail, Manager Queue, Version History).

@@ -75,3 +75,20 @@ yarn-error.log*
 .env.production.local
 application-local.yaml
 application-local.yml
+
+### Node.js ###
+node_modules/
+dist/
+build/
+.npm/
+.pnp/
+.pnp.js
+coverage/
+.next/
+out/
+.nuxt/
+.cache/
+.parcel-cache/
+.docz/
+.serverless/
+.fusebox/
