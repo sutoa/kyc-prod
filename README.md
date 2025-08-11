@@ -101,3 +101,12 @@ java -jar target/kyc-api-0.1.0.jar --spring.profiles.active=prod
 ## License
 
 [License Information]
+
+
+--------
+## start backend
+ mvn spring-boot:run -Dspring.profiles.active=dev
+
+ ## start frontend
+ cd kyc-ui
+ npm run dev
