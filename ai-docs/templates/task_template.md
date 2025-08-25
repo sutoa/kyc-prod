@@ -175,6 +175,13 @@ AI Agent: Analyze the project to fill this out.
 - **Priority: Speed and simplicity** over data preservation
 - **Aggressive refactoring allowed** — delete/recreate components as needed
 
+### What Will Change
+[If this is to add or update features in an existing codebase, list out the artifacts or the areas of the codebase that will be changed.]
+- [file 1 - summary what will be changed]
+- [file 2 - summary what will be changed]
+- [file 3 - summary what will be changed]
+
+
 ---
 
 ## 5. Technical Requirements
