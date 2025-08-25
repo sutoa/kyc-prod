@@ -15,11 +15,131 @@
 **Goal:** [Clear statement of the end result you want and the business/user value it provides]
 
 ---
+## 2. Strategic Analysis & Solution Options
 
-## 2. Project Analysis & Current State
+### When to Use Strategic Analysis
+<!--
+AI Agent: Use your judgement to determine when strategic analysis is needed vs direct implementation.
+-->
+
+**✅ CONDUCT STRATEGIC ANALYSIS WHEN:**
+- For PoC work or where there's no existing codebase
+- Multiple viable technical approaches exist
+- Trade-offs between different solutions are significant
+- User requirements could be met through different UX patterns
+- Architectural decisions will impact future development
+- Implementation approach affects performance, security, or maintainability significantly
+- Change touches multiple systems or has broad impact
+- User has expressed uncertainty about the best approach
+
+**❌ SKIP STRATEGIC ANALYSIS WHEN:**
+- Only one obvious technical solution exists
+- It's a straightforward bug fix or minor enhancement
+- The implementation pattern is clearly established in the codebase
+- Change is small and isolated with minimal impact
+- User has already specified the exact approach they want
+
+**DEFAULT BEHAVIOR:** When in doubt, provide strategic analysis. It's better to over-communicate than to assume.
+
+### Problem Context
+<!-- Restate the problem and why it needs strategic consideration -->
+[Explain the problem and why multiple solutions should be considered — what makes this decision important?]
+
+### Solution Options Analysis
+
+#### Option 1: [Solution Name]
+**Approach:** [Brief description of this solution approach]
+
+**Pros:**
+- ✅ [Advantage 1 — specific benefit]
+- ✅ [Advantage 2 — quantified when possible]
+- ✅ [Advantage 3 — why this is better]
+
+**Cons:**
+- ❌ [Disadvantage 1 — specific limitation]
+- ❌ [Disadvantage 2 — trade-off or cost]
+- ❌ [Disadvantage 3 — risk or complexity]
+
+**Implementation Complexity:** **[Low/Medium/High]** — [Brief justification]  
+**Risk Level:** **[Low/Medium/High]** — [Primary risk factors]
+
+#### Option 2: [Solution Name]
+**Approach:** [Brief description of this solution approach]
+
+**Pros:**
+- ✅ [Advantage 1 — specific benefit]
+- ✅ [Advantage 2 — quantified when possible]
+- ✅ [Advantage 3 — why this is better]
+
+**Cons:**
+- ❌ [Disadvantage 1 — specific limitation]
+- ❌ [Disadvantage 2 — trade-off or cost]
+- ❌ [Disadvantage 3 — risk or complexity]
+
+**Implementation Complexity:** **[Low/Medium/High]** — [Brief justification]  
+**Risk Level:** **[Low/Medium/High]** — [Primary risk factors]
+
+#### Option 3: [Solution Name]
+**Approach:** [Brief description of this solution approach]
+
+**Pros:**
+- ✅ [Advantage 1 — specific benefit]
+- ✅ [Advantage 2 — quantified when possible]
+- ✅ [Advantage 3 — why this is better]
+
+**Cons:**
+- ❌ [Disadvantage 1 — specific limitation]
+- ❌ [Disadvantage 2 — trade-off or cost]
+- ❌ [Disadvantage 3 — risk or complexity]
+
+**Implementation Complexity:** **[Low/Medium/High]** — [Brief justification]  
+**Risk Level:** **[Low/Medium/High]** — [Primary risk factors]
+
+**🎯 RECOMMENDED SOLUTION:** Option **[X]** — **[Solution Name]**
+
+**Why this is the best choice:**
+1. **[Primary reason]** — [Specific justification]
+2. **[Secondary reason]** — [Supporting evidence]
+3. **[Additional reason]** — [Long-term considerations]
+
+**Key Decision Factors:**
+- **Performance Impact:** [How this affects app performance]
+- **User Experience:** [How this affects users]
+- **Maintainability:** [How this affects future development]
+- **Scalability:** [How this handles growth]
+- **Security:** [Security implications]
+
+**Alternative Consideration:**
+[If there’s a close second choice, explain why it wasn’t selected and under what conditions it might be preferable.]
+
+## Decision Request
+
+**👤 USER DECISION REQUIRED:**  
+Based on this analysis, do you want to proceed with the recommended solution (Option **[X]**), or would you prefer a different approach?
+
+**Questions for you to consider:**
+- Does the recommended solution align with your priorities?
+- Are there any constraints or preferences I should factor in?
+- Do you have a different timeline or complexity preference?
+
+**Next Steps:**  
+Once you approve the strategic direction, I'll create the detailed implementation plan in the sections below.
+
+---
+
+## 3. Project Analysis & Current State
 
 ### Technology & Architecture
-<!-- This is where you document your current tech stack so the AI understands your environment -->
+<!--
+AI Agent: Analyze the project to fill this out.
+- Check `package.json` for versions and dependencies.
+- Check `tsconfig.json` for TypeScript configuration.
+- Check `tailwind.config.ts` for styling and theme.
+- Check `drizzle/schema/` for database schema.
+- Check `middleware.ts` for authentication and routing.
+- Check `components/` for existing UI patterns.
+-->
+
 - **Frameworks & Versions:** TODO: List your main frameworks and versions
 - **Language:** TODO: Specify your programming language and version
 - **Database & ORM:** TODO: Define your database and ORM choice
@@ -31,7 +151,7 @@
 <!-- Describe what exists today - what's working, what's broken, what's missing -->
 [Analysis of your current codebase state, existing functionality, and what needs to be changed]
 
-## 3. Context & Problem Definition
+## 4. Context & Problem Definition
 
 ### Problem Statement
 <!-- This is where you clearly define the specific problem you're solving -->
@@ -48,12 +168,12 @@
 ## 4. Development Mode Context
 
 ### Development Mode Context
-<!-- This is where you tell the AI agent about your project's constraints and priorities -->
-- **🚨 Project Stage:** TODO: Define if this is new development, production system, or legacy migration
-- **Breaking Changes:** TODO: Specify if breaking changes are acceptable or must be avoided
-- **Data Handling:** TODO: Define data preservation requirements
-- **User Base:** TODO: Describe who will be affected by changes
-- **Priority:** TODO: Set your speed vs stability priorities
+- **📛 IMPORTANT: This is a new application in active development**
+- **No backwards compatibility concerns** — feel free to make breaking changes
+- **Data loss acceptable** — existing data can be wiped/migrated aggressively
+- **Users are developers/testers** — not production users requiring careful migration
+- **Priority: Speed and simplicity** over data preservation
+- **Aggressive refactoring allowed** — delete/recreate components as needed
 
 ---
 
@@ -61,8 +181,11 @@
 
 ### Functional Requirements
 <!-- This is where the AI will understand exactly what the system should do - be specific about user actions and system behaviors -->
+- [Requirement 1: User can…]
+- [Requirement 2: System will…]
+- [Requirement 3: When X happens, then Y…]
 
-TODO: Define what users can do and what the system will automatically handle
+#### Examples
 - Example format: "User can [specific action]"
 - Example format: "System automatically [specific behavior]" 
 - Example format: "When [condition] occurs, then [system response]"
