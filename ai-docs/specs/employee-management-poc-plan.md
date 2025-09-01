@@ -25,6 +25,21 @@ The project requires building a scalable employee management system with specifi
 #### Option 1: React + Spring Boot + H2 Database
 **Approach:** Use React with Material-UI for frontend, Spring Boot with JPA for backend, and H2 in-memory database for PoC
 
+**UI Design Reference:**
+- **Website Model:** Workday (https://www.workday.com)
+  - Industry leader in enterprise HR management
+  - Known for clean, professional interface
+  - Excellent search and employee profile features
+- **Key UI Elements:**
+  - Employee search with instant results
+  - Clean, card-based employee profiles
+  - Modern data tables for entity/location management
+  - Approval workflow interface similar to Workday's task management
+- **Screenshots:** [Reference Workday's employee directory and profile pages]
+  - Employee Directory View: Grid layout with quick filters
+  - Profile Page: Tabbed interface for different information sections
+  - Change Request Interface: Clear status indicators and approval actions
+
 **Pros:**
 - ✅ React's component-based architecture enables clean, maintainable UI
 - ✅ Material-UI provides professional, ready-to-use components matching modern web standards
@@ -43,6 +58,21 @@ The project requires building a scalable employee management system with specifi
 #### Option 2: Vue.js + Spring Boot + H2 Database
 **Approach:** Use Vue.js with Vuetify for frontend, keeping same backend approach
 
+**UI Design Reference:**
+- **Website Model:** BambooHR (https://www.bamboohr.com)
+  - Modern, intuitive HR management interface
+  - Excellent mobile responsiveness
+  - Clean approval workflows
+- **Key UI Elements:**
+  - Simplified search interface with type-ahead
+  - List/grid toggle for employee directory
+  - Slide-in panels for quick edits
+  - Status-based filtering for approvals
+- **Screenshots:** [Reference BambooHR's interface]
+  - Directory View: List with quick actions
+  - Employee Card: Compact information display
+  - Approval Dashboard: Clear status indicators
+
 **Pros:**
 - ✅ Vue.js is easier to learn for new developers
 - ✅ Vuetify provides Material Design components out of the box
@@ -59,6 +89,21 @@ The project requires building a scalable employee management system with specifi
 
 #### Option 3: Angular + Spring Boot + H2 Database
 **Approach:** Use Angular with Angular Material for frontend
+
+**UI Design Reference:**
+- **Website Model:** Rippling (https://www.rippling.com)
+  - Enterprise-grade employee management
+  - Strong focus on data visualization
+  - Complex workflow management
+- **Key UI Elements:**
+  - Advanced search with multiple filters
+  - Timeline view for changes
+  - Dashboard for approvers
+  - Interactive data grids
+- **Screenshots:** [Reference Rippling's platform]
+  - Search Interface: Multi-select filters
+  - Change Management: Timeline view
+  - Approval Interface: Action-oriented layout
 
 **Pros:**
 - ✅ Full-featured framework with everything included
@@ -166,6 +211,12 @@ The organization needs a modern web application to manage employee information, 
   - Light mode theme
   - Consistent color scheme
   - Professional typography
+- **UI Design References:**
+  - Model after Workday's employee directory interface
+  - Reference BambooHR's approval workflow design
+  - Adopt Rippling's search functionality patterns
+  - Screenshots and mockups included in solution options
+  - Specific UI patterns documented for each major feature
 
 ### Technical Constraints
 - Must use Spring Boot for backend
@@ -329,28 +380,28 @@ interface ChangeRequestDetail {
 
 ### New Components
 1. Layout Components:
-   - AppLayout
-   - Navbar
-   - Sidebar
-   - PageHeader
+   - AppLayout (based on Workday's clean navigation)
+   - Navbar (similar to BambooHR's top navigation)
+   - Sidebar (inspired by Rippling's menu structure)
+   - PageHeader (following Material Design guidelines)
 
 2. Employee Components:
-   - EmployeeSearch
-   - EmployeeDetails
-   - EntityList
-   - LocationList
-   - AssociationForm
+   - EmployeeSearch (using Workday's search patterns)
+   - EmployeeDetails (based on BambooHR's profile layout)
+   - EntityList (inspired by Rippling's data tables)
+   - LocationList (following Material Design patterns)
+   - AssociationForm (clean, modal-based form)
 
 3. Change Management:
-   - ChangeRequestList
-   - ChangeRequestDetail
-   - ApprovalDialog
+   - ChangeRequestList (similar to Workday's approval interface)
+   - ChangeRequestDetail (detailed view with clear diffs)
+   - ApprovalDialog (intuitive action buttons)
 
 4. Common Components:
-   - SearchBar
-   - DataTable
-   - ConfirmDialog
-   - StatusBadge
+   - SearchBar (with type-ahead functionality)
+   - DataTable (responsive and sortable)
+   - ConfirmDialog (clear action messaging)
+   - StatusBadge (clear visual indicators)
 
 ### Page Updates
 1. Search Page:

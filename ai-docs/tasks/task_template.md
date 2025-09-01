@@ -50,6 +50,11 @@ AI Agent: Use your judgement to determine when strategic analysis is needed vs d
 #### Option 1: [Solution Name]
 **Approach:** [Brief description of this solution approach]
 
+**UI Design Reference:**
+- **Website Model:** [Name and URL of website with similar functionality]
+- **Key UI Elements:** [List specific UI patterns/elements to adopt]
+- **Screenshots:** [Include screenshots or mockups demonstrating the approach]
+
 **Pros:**
 - ✅ [Advantage 1 — specific benefit]
 - ✅ [Advantage 2 — quantified when possible]
@@ -66,6 +71,11 @@ AI Agent: Use your judgement to determine when strategic analysis is needed vs d
 #### Option 2: [Solution Name]
 **Approach:** [Brief description of this solution approach]
 
+**UI Design Reference:**
+- **Website Model:** [Name and URL of website with similar functionality]
+- **Key UI Elements:** [List specific UI patterns/elements to adopt]
+- **Screenshots:** [Include screenshots or mockups demonstrating the approach]
+
 **Pros:**
 - ✅ [Advantage 1 — specific benefit]
 - ✅ [Advantage 2 — quantified when possible]
@@ -81,6 +91,11 @@ AI Agent: Use your judgement to determine when strategic analysis is needed vs d
 
 #### Option 3: [Solution Name]
 **Approach:** [Brief description of this solution approach]
+
+**UI Design Reference:**
+- **Website Model:** [Name and URL of website with similar functionality]
+- **Key UI Elements:** [List specific UI patterns/elements to adopt]
+- **Screenshots:** [Include screenshots or mockups demonstrating the approach]
 
 **Pros:**
 - ✅ [Advantage 1 — specific benefit]
@@ -204,6 +219,11 @@ AI Agent: Analyze the project to fill this out.
 - **Usability:** TODO: Set user experience and accessibility standards
 - **Responsive Design:** TODO: Define mobile, tablet, desktop support requirements
 - **Theme Support:** TODO: Specify light/dark mode and brand requirements
+- **UI Design References:** TODO: List specific websites/applications to model the UI after, including:
+  - Screenshots of similar functionality in production applications
+  - Links to reference implementations
+  - Specific UI patterns to adopt or avoid
+  - Design system guidelines if applicable
 
 ### Technical Constraints
 <!-- This is where you list limitations the AI agent must work within -->
